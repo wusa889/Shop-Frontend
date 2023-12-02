@@ -1,0 +1,25 @@
+.formContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.loginform {
+  text-align: center;
+  margin: 40px;
+  padding: 20px;
+  width: 30vw;
+  height: 100%;
+}
+.formItem{
+  width: 100%;
+}
+.submitButton{
+  margin-right: 20px
+}
+.h1left{
+  text-align: left;
+}
+.formItem50{
+  width: 48%;
+  margin-right: 10px
+}

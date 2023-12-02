@@ -1,0 +1,22 @@
+<div class="formContainer">
+  <form class="loginform mat-elevation-z3" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    <mat-form-field class="formItem">
+      <mat-label>E-Mail</mat-label>
+      <mat-error *ngIf="myForm.controls.userName.hasError('required')">
+        Feld darf nicht leer sein
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.userName.hasError('pattern')">
+        Bitte gültige E-Mail Adresse eingeben
+      </mat-error>
+      <input type="email" matInput [formControl]="myForm.controls.userName">
+    </mat-form-field>
+
+    <mat-form-field class="formItem">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput [formControl]="myForm.controls.password">
+    </mat-form-field>
+
+    <button class="submitButton" type="submit" mat-raised-button color="primary">Login</button>
+    <button type="button" mat-raised-button routerLink="/auth/register">Register</button>
+  </form>
+</div>

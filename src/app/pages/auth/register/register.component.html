@@ -1,0 +1,36 @@
+<div class="formContainer">
+  <form class="loginform mat-elevation-z3" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    <h1 class="h1left">Registration</h1>
+    <mat-form-field class="formItem">
+      <mat-label>Anrede</mat-label>
+      <mat-select>
+        <mat-option value="Mann">Mann</mat-option>
+        <mat-option value="Frau">Frau</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="formItem50">
+      <mat-label>Firstname</mat-label>
+      <input type="text" matInput [formControl]="myForm.controls.firstName">
+    </mat-form-field>
+    <mat-form-field class="formItem50">
+      <mat-label>Lastname</mat-label>
+      <input type="text" matInput [formControl]="myForm.controls.lastName">
+    </mat-form-field>
+    <mat-form-field class="formItem">
+      <mat-label>E-Mail</mat-label>
+      <mat-error *ngIf="myForm.controls.email.hasError('required')">
+        Feld darf nicht leer sein
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.email.hasError('pattern')">
+        Bitte gültige E-Mail Adresse eingeben
+      </mat-error>
+      <input type="email" matInput [formControl]="myForm.controls.email">
+    </mat-form-field>
+    <mat-form-field class="formItem">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput [formControl]="myForm.controls.password">
+    </mat-form-field>
+
+    <button type="button" mat-raised-button routerLink="/auth/register">Register</button>
+  </form>
+</div>
