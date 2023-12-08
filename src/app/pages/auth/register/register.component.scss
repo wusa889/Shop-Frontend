@@ -19,7 +19,28 @@
 .h1left{
   text-align: left;
 }
-.formItem50{
-  width: 48%;
-  margin-right: 10px
+.formRow {
+  display: flex;
+  gap: 10px;
+}
+.formItem50 {
+  flex: 1;
+}
+.formItem40{
+  width: 40%;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.formItem20 {
+  flex: 0 1 20%;
+}
+mat-error {
+  height: auto; /* oder setzen Sie einen spezifischen Wert, der groß genug ist */
+  overflow: visible; /* stellt sicher, dass der Text nicht abgeschnitten wird */
 }

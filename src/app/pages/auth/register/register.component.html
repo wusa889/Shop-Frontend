@@ -4,18 +4,61 @@
     <mat-form-field class="formItem">
       <mat-label>Anrede</mat-label>
       <mat-select>
-        <mat-option value="Mann">Mann</mat-option>
+        <mat-option value="Mann">Herr</mat-option>
         <mat-option value="Frau">Frau</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="formItem50">
-      <mat-label>Firstname</mat-label>
-      <input type="text" matInput [formControl]="myForm.controls.firstName">
+
+    <div class="formRow">
+      <mat-form-field class="formItem50">
+        <mat-label>Firstname</mat-label>
+        <input type="text" matInput [formControl]="myForm.controls.firstName">
+      </mat-form-field>
+
+      <mat-form-field class="formItem50">
+        <mat-label>Lastname</mat-label>
+        <input type="text" matInput [formControl]="myForm.controls.lastName">
+      </mat-form-field>
+
+    </div>
+
+      <mat-form-field class="formItem">
+        <mat-label>Street</mat-label>
+        <input type="text" matInput [formControl]="myForm.controls.street">
+      </mat-form-field>
+
+    <div class="formRow">
+      <mat-form-field class="formItem40">
+        <mat-label>City</mat-label>
+        <input type="text" matInput [formControl]="myForm.controls.city">
+      </mat-form-field>
+
+      <mat-form-field class="formItem20">
+        <mat-label>Zip</mat-label>
+        <mat-error *ngIf="myForm.controls.zip.hasError('pattern')">
+          Zip kann nur aus Zahlen bestehen.
+        </mat-error>
+        <input type="text" matInput [formControl]="myForm.controls.zip">
+      </mat-form-field>
+
+    </div>
+
+    <mat-form-field class="formItem">
+      <mat-label>Country</mat-label>
+      <input type="text" matInput [formControl]="myForm.controls.country">
     </mat-form-field>
+
+    <div class="formRow">
     <mat-form-field class="formItem50">
-      <mat-label>Lastname</mat-label>
-      <input type="text" matInput [formControl]="myForm.controls.lastName">
+      <mat-label>Phone Number</mat-label>
+      <input type="number" matInput [formControl]="myForm.controls.phone">
     </mat-form-field>
+      <mat-form-field class="formItem50">
+        <mat-label>Mobile Number</mat-label>
+        <input type="number" matInput [formControl]="myForm.controls.mobilePhone">
+      </mat-form-field>
+    </div>
+
     <mat-form-field class="formItem">
       <mat-label>E-Mail</mat-label>
       <mat-error *ngIf="myForm.controls.email.hasError('required')">
@@ -26,6 +69,7 @@
       </mat-error>
       <input type="email" matInput [formControl]="myForm.controls.email">
     </mat-form-field>
+
     <mat-form-field class="formItem">
       <mat-label>Password</mat-label>
       <input type="password" matInput [formControl]="myForm.controls.password">
