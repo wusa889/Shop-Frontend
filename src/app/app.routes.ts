@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
+import {isAdminGuard} from "./guards/is-admin.guard";
 
 export const routes: Routes = [
   {
     path: 'auth/login',
-    loadComponent: () => import('./pages/auth/login/login.component').then(val => val.LoginComponent)
+    loadComponent: () => import('./pages/auth/login/login.component').then(val => val.LoginComponent),
   },
   {
     path: 'auth/register',
@@ -15,24 +16,27 @@ export const routes: Routes = [
       import('./pages/products/product-list-component/product-list-component.component').then(val => val.ProductListComponentComponent)
   },
   {
-    path: 'product/modify/:id',
+    path: 'product/modify',
     loadComponent: () =>
-      import('./pages/products/product-modify/product-modify.component').then(val => val.ProductModifyComponent)
+      import('./pages/products/product-modify/product-modify.component').then(val => val.ProductModifyComponent),
+    canActivate: [isAdminGuard]
   },
   {
     path: 'product/create',
     loadComponent: () =>
-      import('./pages/products/product-modify/product-modify.component').then(val => val.ProductModifyComponent)
+      import('./pages/products/product-modify/product-modify.component').then(val => val.ProductModifyComponent),
+    canActivate: [isAdminGuard]
   },
   {
-    path: 'product/detail/:id',
+    path: 'product/detail',
     loadComponent: () =>
       import('./pages/products/product-detail/product-detail.component').then(val => val.ProductDetailComponent)
   },
   {
-    path: 'product/delete/:id',
+    path: 'product/delete',
     loadComponent: () =>
-      import('./pages/products/product-delete/product-delete.component').then(val => val.ProductDeleteComponent)
+      import('./pages/products/product-delete/product-delete.component').then(val => val.ProductDeleteComponent),
+    canActivate: [isAdminGuard]
   },
   {
     path: 'category/all',
@@ -40,27 +44,30 @@ export const routes: Routes = [
       import('./pages/category/category-list/category-list.component').then(val => val.CategoryListComponent)
   },
   {
-    path: 'category/detail/:id',
+    path: 'category/detail',
     loadComponent: () =>
       import('./pages/category/category-list/category-list.component').then(val => val.CategoryListComponent)
   },
   {
     path: 'category/create',
     loadComponent: () =>
-      import('./pages/category/category-modify/category-modify.component').then(val => val.CategoryModifyComponent)
+      import('./pages/category/category-modify/category-modify.component').then(val => val.CategoryModifyComponent),
+    canActivate: [isAdminGuard]
   },
   {
-    path: 'category/edit/:id',
+    path: 'category/edit',
     loadComponent: () =>
-      import('./pages/category/category-modify/category-modify.component').then(val => val.CategoryModifyComponent)
+      import('./pages/category/category-modify/category-modify.component').then(val => val.CategoryModifyComponent),
+    canActivate: [isAdminGuard]
   },
   {
-    path: 'category/delete/:id',
+    path: 'category/delete',
     loadComponent: () =>
-      import('./pages/category/category-delete/category-delete.component').then(val => val.CategoryDeleteComponent)
+      import('./pages/category/category-delete/category-delete.component').then(val => val.CategoryDeleteComponent),
+    canActivate: [isAdminGuard]
   },
   {
-    path: 'category/list/:id',
+    path: 'category/list',
     loadComponent: () =>
       import('./pages/category/category-list-products/category-list-products.component').then(val => val.CategoryListProductsComponent)
   }
