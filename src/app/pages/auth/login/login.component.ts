@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -10,7 +10,7 @@ import {
 } from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {UserControllerService} from "../../../openapi-client";
 
 
@@ -23,6 +23,7 @@ import {UserControllerService} from "../../../openapi-client";
 })
 
 export class LoginComponent {
+  router = inject(Router)
   constructor(
     private readonly userService: UserControllerService
   ) {
@@ -41,6 +42,7 @@ export class LoginComponent {
     }).subscribe(value =>{
       console.log(value)
       localStorage.setItem("ACCESS_TOKEN", value.token!)
+      this.router.navigateByUrl('/')
     })
   }
 }
