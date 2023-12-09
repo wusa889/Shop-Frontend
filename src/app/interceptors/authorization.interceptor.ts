@@ -3,10 +3,11 @@ import {inject} from "@angular/core";
 import {Router} from "@angular/router";
 
 export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
+  debugger
   if (localStorage.getItem("ACCESS_TOKEN")) {
     return next(req.clone ({
       setHeaders: {
-        'Authorization': 'Bearer ${localStorage.getItem("ACCESS_TOKEN")}'
+        'Authorization': `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
       }
     }));
   }
