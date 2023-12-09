@@ -11,6 +11,8 @@ import {
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {RouterLink} from "@angular/router";
+import {UserControllerService} from "../../../openapi-client";
+
 
 @Component({
   selector: 'pm-login',
@@ -19,15 +21,26 @@ import {RouterLink} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
+
 export class LoginComponent {
+  constructor(
+    private readonly userService: UserControllerService
+  ) {
+  }
   myForm = new FormGroup({
-    userName: new FormControl(null, [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(8)])
+    userName: new FormControl<string>("", [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+    password: new FormControl<string>("", [Validators.required, Validators.minLength(8)])
     }
   )
-
-
   submit(): void{
-    //some code
+    let userName = this.myForm.value.userName!
+    let password = this.myForm.value.password!
+    this.userService.login({
+        email: userName,
+        password: password
+    }).subscribe(value =>{
+      console.log(value)
+      localStorage.setItem("ACCESS_TOKEN", value.token!)
+    })
   }
 }

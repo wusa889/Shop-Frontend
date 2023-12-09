@@ -75,6 +75,6 @@
       <input type="password" matInput [formControl]="myForm.controls.password">
     </mat-form-field>
 
-    <button type="button" mat-raised-button routerLink="/auth/register">Register</button>
+    <button type="button" mat-raised-button (click)="submit()">Register</button>
   </form>
 </div>
