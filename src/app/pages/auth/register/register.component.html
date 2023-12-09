@@ -3,7 +3,7 @@
     <h1 class="h1left">Registration</h1>
     <mat-form-field class="formItem">
       <mat-label>Anrede</mat-label>
-      <mat-select>
+      <mat-select [formControl]="myForm.controls.firstName">
         <mat-option value="Mann">Herr</mat-option>
         <mat-option value="Frau">Frau</mat-option>
       </mat-select>

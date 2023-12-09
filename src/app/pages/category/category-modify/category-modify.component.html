@@ -1,1 +1,15 @@
-<p>category-modify works!</p>
+<div class="formContainer">
+  <form class="catEditForm mat-elevation-z3" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    <mat-form-field class="formItem">
+      <mat-label>Name</mat-label>
+      <mat-error *ngIf="myForm.controls.catName.hasError('required')">
+        Feld darf nicht leer sein
+      </mat-error>
+      <input type="text" matInput [formControl]="myForm.controls.catName">
+    </mat-form-field>
+    <mat-slide-toggle class="formItem" [formControl]="myForm.controls.isActive">Active</mat-slide-toggle>
+  <div class="buttonContainer">
+    <button class="submitButton" color="primary" type="button" mat-raised-button (click)="submit()">Absenden</button>
+  </div>
+  </form>
+</div>

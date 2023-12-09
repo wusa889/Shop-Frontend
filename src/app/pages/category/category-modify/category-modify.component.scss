@@ -1,0 +1,23 @@
+.formContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.catEditForm {
+  margin: 40px;
+  padding: 20px;
+  width: 30vw;
+  height: auto;
+}
+.formItem{
+  width: 90%;
+  padding: 10px;
+}
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+}
+.submitButton{
+  margin-right: 20px;
+  margin-top: 20px;
+}
