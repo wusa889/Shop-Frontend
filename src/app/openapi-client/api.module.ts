@@ -1,32 +1,13 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { Configuration } from './configuration';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {BrowserModule} from "@angular/platform-browser";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HeaderComponent} from "../header/header.component";
-import {FooterComponent} from "../footer/footer.component";
-import {AppComponent} from "../app.component";
+
 
 
 @NgModule({
-  imports:      [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ApiModule.forRoot(() => {
-      return new Configuration( {
-        basePath: 'https://product-manager.cyrotech.ch'
-      })
-    }),
-    HeaderComponent,
-    FooterComponent
-  ],
-  declarations: [
-    AppComponent
-  ],
+  imports:      [],
+  declarations: [],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
