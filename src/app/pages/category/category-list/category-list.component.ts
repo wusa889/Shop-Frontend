@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {CategoryControllerService} from "../../../openapi-client";
 
 @Component({
   selector: 'pm-category-list',
@@ -9,5 +10,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './category-list.component.scss'
 })
 export class CategoryListComponent {
+  constructor(
+    private readonly catService: CategoryControllerService
+  ) {
+  }
+  showCategories(): void{
+    this.catService.getAllCategories().subscribe(value => {
+      console.log(value)
+    })
+  }
 
 }
