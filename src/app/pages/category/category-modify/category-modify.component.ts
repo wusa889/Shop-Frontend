@@ -32,7 +32,13 @@ export class CategoryModifyComponent {
   }
   )
   submit(): void{
-    console.log(this.myForm.value.catName);
-    console.log(this.myForm.value.isActive);
+   let isActive: boolean = this.myForm.value.isActive!;
+   let catName: string = this.myForm.value.catName!;
+   this.catService.createCategory({
+     active: isActive,
+     name: catName
+   }).subscribe(value =>{
+     console.log("Category Created")
+   });
   }
 }
