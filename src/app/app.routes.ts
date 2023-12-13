@@ -70,6 +70,12 @@ export const routes: Routes = [
     path: 'category/list',
     loadComponent: () =>
       import('./pages/category/category-list-products/category-list-products.component').then(val => val.CategoryListProductsComponent)
+  },
+  {
+    path: 'auth/list',
+    loadComponent: () =>
+      import('./pages/auth/listusers/listusers.component').then(val => val.ListusersComponent),
+    canActivate: [isAdminGuard]
   }
 
 ];
