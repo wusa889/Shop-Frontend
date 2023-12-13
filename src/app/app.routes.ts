@@ -16,7 +16,7 @@ export const routes: Routes = [
       import('./pages/products/product-list-component/product-list-component.component').then(val => val.ProductListComponentComponent)
   },
   {
-    path: 'product/modify',
+    path: 'product/modify:id',
     loadComponent: () =>
       import('./pages/products/product-modify/product-modify.component').then(val => val.ProductModifyComponent),
     canActivate: [isAdminGuard]
@@ -28,12 +28,12 @@ export const routes: Routes = [
     canActivate: [isAdminGuard]
   },
   {
-    path: 'product/detail',
+    path: 'product/detail:id',
     loadComponent: () =>
       import('./pages/products/product-detail/product-detail.component').then(val => val.ProductDetailComponent)
   },
   {
-    path: 'product/delete',
+    path: 'product/delete:id',
     loadComponent: () =>
       import('./pages/products/product-delete/product-delete.component').then(val => val.ProductDeleteComponent),
     canActivate: [isAdminGuard]
@@ -61,7 +61,7 @@ export const routes: Routes = [
     canActivate: [isAdminGuard]
   },
   {
-    path: 'category/delete',
+    path: 'category/delete:id',
     loadComponent: () =>
       import('./pages/category/category-delete/category-delete.component').then(val => val.CategoryDeleteComponent),
     canActivate: [isAdminGuard]

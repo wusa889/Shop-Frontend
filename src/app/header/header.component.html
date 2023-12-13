@@ -1,26 +1,15 @@
 <mat-toolbar color="primary">
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu>
   <mat-menu #catmenu="matMenu">
+    <button mat-menu-item routerLink="category/all">All</button>
     <button mat-menu-item routerLink="category/create">Create</button>
-    <button mat-menu-item routerLink="category/edit/:id">Edit</button>
-    <button mat-menu-item routerLink="category/delete/:id">Delete</button>
-    <button mat-menu-item routerLink="category/list/:id">All</button>
   </mat-menu>
   <mat-menu #prodmenu="matMenu">
     <button mat-menu-item routerLink="product/all">All</button>
-    <button mat-menu-item routerLink="product/detail/:id">Detail</button>
     <button mat-menu-item routerLink="product/create">Create</button>
-    <button mat-menu-item routerLink="product/edit/:id">Edit</button>
-    <button mat-menu-item routerLink="product/delete/:id">Delete</button>
   </mat-menu>
-  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
   <span>My App</span>
   <span class="example-spacer"></span>
+  <button mat-button routerLink="auth/login">Login</button>
   <button mat-button [matMenuTriggerFor]="catmenu">Categories</button>
   <button mat-button [matMenuTriggerFor]="prodmenu">Products</button>
 </mat-toolbar>
