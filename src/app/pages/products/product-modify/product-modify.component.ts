@@ -42,7 +42,7 @@ export class ProductModifyComponent {
       description: description,
       price: price,
       stock: stock,
-      active: active
+      active: active,
     }).subscribe(value => {
       console.log("Product Created")
     })
