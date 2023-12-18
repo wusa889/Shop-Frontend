@@ -26,6 +26,7 @@ export class CategoryModifyComponent {
       private readonly catService: CategoryControllerService
   ) {
   }
+
   myForm = new FormGroup({
         isActive: new FormControl<boolean>(false, Validators.required),
         catName: new FormControl<string>("", Validators.required)
