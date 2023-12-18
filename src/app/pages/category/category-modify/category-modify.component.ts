@@ -9,6 +9,8 @@ import {RouterLink} from "@angular/router";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { ActivatedRoute, Params } from '@angular/router';
+
 interface Actives {
   value: boolean;
   viewValue: string;
@@ -23,17 +25,52 @@ interface Actives {
 export class CategoryModifyComponent {
   selectedValue: boolean | undefined;
   constructor(
-      private readonly catService: CategoryControllerService
+      private readonly catService: CategoryControllerService,
+      private route: ActivatedRoute // Inject ActivatedRoute here
   ) {
   }
 
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      const categoryId = +params['id']; // The '+' converts the string to a number
+      if (categoryId) {
+        this.categoryId = categoryId; // Set your component's categoryId property
+        this.loadCategoryData(categoryId);
+      }
+    });
+  }
   myForm = new FormGroup({
         isActive: new FormControl<boolean>(false, Validators.required),
         catName: new FormControl<string>("", Validators.required)
       }
   )
-  submit(): void{
-    console.log(this.myForm.value.catName);
-    console.log(this.myForm.value.isActive);
+  categoryId?: number;
+
+  submit(): void {
+    let active = this.myForm.value.isActive!;
+    let name = this.myForm.value.catName!;
+    if (this.categoryId) {
+      this.catService.updateCategoryById(this.categoryId, {
+        active: active,
+        name: name
+      }).subscribe(value =>{
+        console.log("Category id: "+ this.categoryId + " name: " + name + " Was updated.")
+      });
+    } else {
+       this.catService.createCategory({
+         active: active,
+         name: name
+       }).subscribe(value => {
+         console.log("Category was Created")
+       });
+    }
+  }
+  loadCategoryData(categoryId: number): void {
+    this.catService.getCategoryById(categoryId).subscribe(category => {
+      this.myForm.patchValue({
+        isActive: category.active,
+        catName: category.name
+      });
+    });
   }
 }
