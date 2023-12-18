@@ -23,13 +23,13 @@ interface Actives {
 export class CategoryModifyComponent {
   selectedValue: boolean | undefined;
   constructor(
-    private readonly catService: CategoryControllerService
+      private readonly catService: CategoryControllerService
   ) {
   }
   myForm = new FormGroup({
-    isActive: new FormControl<boolean>(false, Validators.required),
-    catName: new FormControl<string>("", Validators.required)
-  }
+        isActive: new FormControl<boolean>(false, Validators.required),
+        catName: new FormControl<string>("", Validators.required)
+      }
   )
   submit(): void{
     console.log(this.myForm.value.catName);
