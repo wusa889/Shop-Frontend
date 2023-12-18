@@ -1,5 +1,5 @@
 <div class="formContainer">
-  <form class="loginform mat-elevation-z3" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+  <form [formGroup]="myForm" (ngSubmit)="submit()" class="loginform mat-elevation-z3">
     <mat-form-field class="formItem">
       <mat-label>E-Mail</mat-label>
       <mat-error *ngIf="myForm.controls.userName.hasError('required')">

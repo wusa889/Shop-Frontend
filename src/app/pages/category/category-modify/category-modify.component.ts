@@ -24,20 +24,15 @@ export class CategoryModifyComponent {
   selectedValue: boolean | undefined;
   constructor(
     private readonly catService: CategoryControllerService
-  ) {  }
+  ) {
+  }
   myForm = new FormGroup({
     isActive: new FormControl<boolean>(false, Validators.required),
     catName: new FormControl<string>("", Validators.required)
   }
   )
   submit(): void{
-   let isActive: boolean = this.myForm.value.isActive!;
-   let catName: string = this.myForm.value.catName!;
-   this.catService.createCategory({
-     active: isActive,
-     name: catName
-   }).subscribe(value =>{
-     console.log("Category Created")
-   });
+    console.log(this.myForm.value.catName);
+    console.log(this.myForm.value.isActive);
   }
 }

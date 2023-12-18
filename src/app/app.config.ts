@@ -6,6 +6,7 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {ApiModule, Configuration} from "./openapi-client";
 import {provideHttpClient, withInterceptors, withInterceptorsFromDi} from "@angular/common/http";
 import {authorizationInterceptor} from "./interceptors/authorization.interceptor";
+import {expiredInterceptor} from "./interceptors/expired.interceptor";
 
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
             provideAnimations(),
             provideHttpClient(
                 withInterceptors([
+                    expiredInterceptor,
                     authorizationInterceptor,
                 ])
             ),
