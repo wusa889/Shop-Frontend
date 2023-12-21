@@ -35,6 +35,10 @@ export class CategoryListComponent {
   goToEditPage(id: number) {
     this.router.navigate(['/category/edit', id]).then(r => false);
   }
+  goToDetailPage(id: number) {
+    this.router.navigate(['/category/detail', id]).then(r => false);
+  }
+
   deleteCategory(id: number){
     this.catService.deleteCategoryById(id).subscribe(value => {
       console.log("Category was deleted")

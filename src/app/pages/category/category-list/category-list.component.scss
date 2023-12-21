@@ -14,3 +14,13 @@ table.mat-elevation-z3 {
   width: 50vw;
   margin: 20px;
 }
+.linkName {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.linkName:hover {
+  color: red;
+
+}

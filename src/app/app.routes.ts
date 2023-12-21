@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import {isAdminGuard} from "./guards/is-admin.guard";
 import {expiredGuardGuard} from "./guards/expiredGuardGuard";
+import {AllUserComponent} from "./pages/user/all-user/all-user.component";
 
 export const routes: Routes = [
   {
@@ -39,9 +40,9 @@ export const routes: Routes = [
       import('./pages/category/category-list/category-list.component').then(val => val.CategoryListComponent)
   },
   {
-    path: 'category/detail',
+    path: 'category/detail/:id',
     loadComponent: () =>
-      import('./pages/category/category-list/category-list.component').then(val => val.CategoryListComponent)
+      import('./pages/category/category-detail/category-detail.component').then(val => val.CategoryDetailComponent)
   },
   {
     path: 'category/create',
@@ -55,6 +56,10 @@ export const routes: Routes = [
       import('./pages/category/category-modify/category-modify.component').then(val => val.CategoryModifyComponent),
     canActivate: [expiredGuardGuard, isAdminGuard]
   },
-
-
+  {
+    path: 'users/all',
+    loadComponent: () =>
+      import('./pages/user/all-user/all-user.component').then(val => val.AllUserComponent),
+    canActivate: [expiredGuardGuard, isAdminGuard]
+  },
 ];

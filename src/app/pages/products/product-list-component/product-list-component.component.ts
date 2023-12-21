@@ -17,6 +17,7 @@ export class ProductListComponentComponent {
   products: ProductShowDto[] = [];
   displayedColumns: string[] = ['id', 'name', 'stock', 'price', 'sku', 'action']
 
+
   constructor(
     private readonly prodService: ProductControllerService,
     private router: Router
@@ -33,6 +34,10 @@ export class ProductListComponentComponent {
   goToEditPage(id: number) {
     this.router.navigate(['/product/edit', id]).then(r => false);
   }
+  goToDetailPage(id: number){
+    this.router.navigate(['/product/detail', id]).then(r => false);
+  }
+
   deleteProduct(id: number){
     this.prodService.deleteProductById(id).subscribe(value => {
       console.log("product was deleted.")
