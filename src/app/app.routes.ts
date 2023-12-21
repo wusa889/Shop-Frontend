@@ -55,10 +55,6 @@ export const routes: Routes = [
       import('./pages/category/category-modify/category-modify.component').then(val => val.CategoryModifyComponent),
     canActivate: [expiredGuardGuard, isAdminGuard]
   },
-  {
-    path: 'category/list',
-    loadComponent: () =>
-      import('./pages/category/category-list-products/category-list-products.component').then(val => val.CategoryListProductsComponent)
-  }
+
 
 ];

@@ -37,6 +37,16 @@ export class ProductListComponentComponent {
     this.prodService.deleteProductById(id).subscribe(value => {
       console.log("product was deleted.")
       this.showProducts()
-    })
+    },
+      error => {
+      if (error.status === 403) {
+        console.log("Authentication Error please login again")
+        this.router.navigateByUrl('/auth/login');
+      }
+      else{
+        console.log("Something dumb happend, please try again")
+      }
+      }
+    )
   }
 }

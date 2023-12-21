@@ -35,6 +35,22 @@ export class CategoryListComponent {
   goToEditPage(id: number) {
     this.router.navigate(['/category/edit', id]).then(r => false);
   }
+  deleteCategory(id: number){
+    this.catService.deleteCategoryById(id).subscribe(value => {
+      console.log("Category was deleted")
+      this.showCategories()
+    },
+      error => {
+      if (error.status === 403) {
+        console.log("Authentication Error please login again")
+        this.router.navigateByUrl('/auth/login');
+      }
+      else{
+        console.log("Something dumb happend, please try again")
+      }
+      }
+    )
+  }
 
 
 
