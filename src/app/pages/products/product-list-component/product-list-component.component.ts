@@ -30,8 +30,13 @@ export class ProductListComponentComponent {
       this.products = value;
     });
   }
-
   goToEditPage(id: number) {
     this.router.navigate(['/product/edit', id]).then(r => false);
+  }
+  deleteProduct(id: number){
+    this.prodService.deleteProductById(id).subscribe(value => {
+      console.log("product was deleted.")
+      this.showProducts()
+    })
   }
 }
