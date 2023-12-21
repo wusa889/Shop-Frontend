@@ -7,9 +7,10 @@
     <button mat-menu-item routerLink="product/all">All</button>
     <button mat-menu-item routerLink="product/create">Create</button>
   </mat-menu>
-  <span>My App</span>
+  <button mat-button (click)="toHome()" class="home">My App</button>
   <span class="example-spacer"></span>
-  <button mat-button routerLink="auth/login">Login</button>
+  <button *ngIf="!isLoggedIn" mat-button routerLink="auth/login">Login</button>
+  <button *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</button>
   <button mat-button [matMenuTriggerFor]="catmenu">Categories</button>
   <button mat-button [matMenuTriggerFor]="prodmenu">Products</button>
 </mat-toolbar>

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, EventEmitter, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -12,6 +12,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {Router, RouterLink} from "@angular/router";
 import {UserControllerService} from "../../../openapi-client";
+import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
+
 
 
 @Component({
@@ -28,6 +30,8 @@ export class LoginComponent {
     private readonly userService: UserControllerService
   ) {
   }
+  static onLoginChange: EventEmitter<boolean> = new EventEmitter();
+
   myForm = new FormGroup({
     userName: new FormControl<string>("", [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
     password: new FormControl<string>("", [Validators.required, Validators.minLength(8)])
@@ -43,6 +47,7 @@ export class LoginComponent {
       console.log(value)
       localStorage.setItem("ACCESS_TOKEN", value.token!)
       this.router.navigateByUrl('/')
+      LoginComponent.onLoginChange.emit(true);
     })
   }
 }

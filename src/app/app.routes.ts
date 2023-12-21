@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {isAdminGuard} from "./guards/is-admin.guard";
 import {expiredGuardGuard} from "./guards/expiredGuardGuard";
-import {AllUserComponent} from "./pages/user/all-user/all-user.component";
+
 
 export const routes: Routes = [
   {
@@ -59,7 +59,7 @@ export const routes: Routes = [
   {
     path: 'users/all',
     loadComponent: () =>
-      import('./pages/user/all-user/all-user.component').then(val => val.AllUserComponent),
+      import('./pages/auth/listusers/listusers.component').then(val => val.ListusersComponent),
     canActivate: [expiredGuardGuard, isAdminGuard]
   },
 ];
