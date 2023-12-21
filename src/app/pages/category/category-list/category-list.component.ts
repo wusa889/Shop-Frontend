@@ -33,9 +33,7 @@ export class CategoryListComponent {
     });
   }
   goToEditPage(id: number) {
-    console.log("i work")
     this.router.navigate(['/category/edit', id]).then(r => false);
-
   }
 
 

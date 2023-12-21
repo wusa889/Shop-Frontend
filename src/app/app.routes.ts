@@ -17,7 +17,7 @@ export const routes: Routes = [
       import('./pages/products/product-list-component/product-list-component.component').then(val => val.ProductListComponentComponent)
   },
   {
-    path: 'product/modify/:id',
+    path: 'product/edit/:id',
     loadComponent: () =>
       import('./pages/products/product-modify/product-modify.component').then(val => val.ProductModifyComponent),
     canActivate: [expiredGuardGuard, isAdminGuard]
