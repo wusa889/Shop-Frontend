@@ -1,1 +1,24 @@
-<p>product-detail works!</p>
+<div class="main-container">
+  <div class="image-container" alt="test">
+    <img [src]="imageSource">
+  </div>
+  <div class="table-container">
+    <table mat-table [dataSource]="displayData" class="mat-elevation-z3">
+      <!-- Key Column -->
+      <ng-container matColumnDef="key">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" class="bold-element"> {{element.key}} </td>
+      </ng-container>
+      <!-- Value Column -->
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+      </ng-container>
+
+      <tr mat-row *matRowDef="let row; columns: ['key', 'value'];"></tr>
+    </table>
+    <div class="back-container">
+      <mat-icon (click)="goBack()" class="icon-display">reply</mat-icon>
+    </div>
+  </div>
+</div>

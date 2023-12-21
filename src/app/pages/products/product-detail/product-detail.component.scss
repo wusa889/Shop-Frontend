@@ -1,0 +1,48 @@
+.main-container {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  width: 100%;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.icon-display {
+  color: navy;
+  transform: scale(2);
+  cursor: pointer; /* Make it look clickable */
+}
+
+.back-container {
+  margin-top: 20px; /* Add space above the arrow */
+  display: flex;
+  justify-content: center; /* Center the back arrow horizontally */
+}
+
+.image-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+}
+
+.center {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.mat-elevation-z3 {
+  margin: 0 auto; /* Center the table */
+  width: auto;
+}
+.icon-display:hover {
+  color: red; /* Color changes to red on hover */
+}
+.bold-element{
+  font-weight: bold;
+}
