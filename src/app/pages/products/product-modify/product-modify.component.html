@@ -1,73 +1,73 @@
 <div class="formContainer">
-    <form class="catEditForm mat-elevation-z3" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
-        <mat-form-field class="formItem">
-            <mat-label>Name</mat-label>
-          <mat-error *ngIf="myForm.controls.name.hasError('required')">
-            Field cant be empty
-          </mat-error>
-            <input type="text" matInput [formControl]="myForm.controls.name">
-        </mat-form-field>
+  <form class="catEditForm mat-elevation-z3" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    <mat-form-field class="formItem">
+      <mat-label>Name</mat-label>
+      <mat-error *ngIf="myForm.controls.name.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <input type="text" matInput [formControl]="myForm.controls.name">
+    </mat-form-field>
 
-        <mat-form-field class="formItem">
-            <mat-label>Preis</mat-label>
-          <mat-error *ngIf="myForm.controls.price.hasError('required')">
-            Field cant be empty
-          </mat-error>
-          <mat-error *ngIf="myForm.controls.price.hasError('pattern')">
-            Field can only contain numbers
-          </mat-error>
-            <input type="text" matInput [formControl]="myForm.controls.price">
-        </mat-form-field>
+    <mat-form-field class="formItem">
+      <mat-label>Preis</mat-label>
+      <mat-error *ngIf="myForm.controls.price.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.price.hasError('pattern')">
+        Field can only contain numbers
+      </mat-error>
+      <input type="text" matInput [formControl]="myForm.controls.price">
+    </mat-form-field>
 
-        <mat-form-field class="formItem">
-            <mat-label>Beschreibung</mat-label>
-            <mat-error *ngIf="myForm.controls.description.hasError('required')">
-              Field cant be empty
-            </mat-error>
-            <textarea matInput [formControl]="myForm.controls.description"></textarea>
-        </mat-form-field>
+    <mat-form-field class="formItem">
+      <mat-label>Beschreibung</mat-label>
+      <mat-error *ngIf="myForm.controls.description.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <textarea matInput [formControl]="myForm.controls.description"></textarea>
+    </mat-form-field>
 
-        <mat-form-field class="formItem">
-            <mat-label>Stock</mat-label>
-            <mat-error *ngIf="myForm.controls.stock.hasError('required')">
-              Field cant be empty
-            </mat-error>
-          <mat-error *ngIf="myForm.controls.stock.hasError('pattern')">
-            Field can only contain whole numbers or has to be empty
-          </mat-error>
-            <input type="text" matInput [formControl]="myForm.controls.stock">
-        </mat-form-field>
+    <mat-form-field class="formItem">
+      <mat-label>Stock</mat-label>
+      <mat-error *ngIf="myForm.controls.stock.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.stock.hasError('pattern')">
+        Field can only contain whole numbers or has to be empty
+      </mat-error>
+      <input type="text" matInput [formControl]="myForm.controls.stock">
+    </mat-form-field>
 
-        <mat-form-field class="formItem">
-            <mat-label>SKU</mat-label>
-            <mat-error *ngIf="myForm.controls.sku.hasError('required')">
-              Field cant be empty
-            </mat-error>
-            <input type="text" matInput [formControl]="myForm.controls.sku">
-        </mat-form-field>
-
-
-        <mat-form-field class="formItem">
-            <mat-label>Bild Pfad</mat-label>
-            <mat-error *ngIf="myForm.controls.image.hasError('required')">
-              Field cant be empty
-            </mat-error>
-            <input type="text" matInput [formControl]="myForm.controls.image">
-        </mat-form-field>
-
-      <mat-form-field class="formItem">
-        <mat-label>Category ID</mat-label>
-        <mat-error *ngIf="myForm.controls.categoryId.hasError('pattern')">
-          Field can only contain whole numbers or has to be empty
-        </mat-error>
-        <input type="text" matInput [formControl]="myForm.controls.categoryId">
-      </mat-form-field>
-
-        <mat-slide-toggle class="formItem" [formControl]="myForm.controls.active">Active</mat-slide-toggle>
+    <mat-form-field class="formItem">
+      <mat-label>SKU</mat-label>
+      <mat-error *ngIf="myForm.controls.sku.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <input type="text" matInput [formControl]="myForm.controls.sku">
+    </mat-form-field>
 
 
-        <div class="buttonContainer">
-            <button class="submitButton" color="primary" type="button" mat-raised-button (click)="submit()">Absenden</button>
-        </div>
-    </form>
+    <mat-form-field class="formItem">
+      <mat-label>Bild Pfad</mat-label>
+      <mat-error *ngIf="myForm.controls.image.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <input type="text" matInput [formControl]="myForm.controls.image">
+    </mat-form-field>
+
+    <mat-form-field class="formItem">
+      <mat-label>Category ID</mat-label>
+      <mat-error *ngIf="myForm.controls.categoryId.hasError('pattern')">
+        Field can only contain whole numbers or has to be empty
+      </mat-error>
+      <input type="text" matInput [formControl]="myForm.controls.categoryId">
+    </mat-form-field>
+
+    <mat-slide-toggle class="formItem" [formControl]="myForm.controls.active">Active</mat-slide-toggle>
+
+
+    <div class="buttonContainer">
+      <button class="submitButton" color="primary" type="button" mat-raised-button (click)="submit()">Submit</button>
+    </div>
+  </form>
 </div>

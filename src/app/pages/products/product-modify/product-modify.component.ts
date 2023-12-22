@@ -27,7 +27,6 @@ export class ProductModifyComponent {
   ) {
   }
   productId?: number;
-
   myForm = new FormGroup({
     sku: new FormControl<string>("", Validators.required),
     name: new FormControl<string>("", Validators.required),
@@ -83,7 +82,6 @@ export class ProductModifyComponent {
           })
         });
     }
-
     //executed if no product id is present
     else {
       this.prodService.createProduct({

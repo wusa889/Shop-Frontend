@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 import {IsAdminDirective} from "../../../directives/is-admin.directive";
 import {LoginComponent} from "../../auth/login/login.component";
 import {jwtDecode} from "jwt-decode";
+import Swal from "sweetalert2";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'pm-category-list',
@@ -24,13 +26,13 @@ export class CategoryListComponent {
   private adminRoleSubscription: Subscription;
   constructor(
       private readonly catService: CategoryControllerService,
-      private router: Router
-
+      private router: Router,
+      private tostr: ToastrService
   ) {this.adminRoleSubscription = LoginComponent.onLoginChange.subscribe((isLoggedIn) => {
     this.updateDisplayedColumns();
   });
   }
-
+  //sets initial values and checks if user is admin
   ngOnInit(): void {
     this.updateDisplayedColumns();
     this.showCategories(); // Fetch and display categories
@@ -39,42 +41,70 @@ export class CategoryListComponent {
       this.showCategories(); // Re-fetch and display categories if login status changes
     });
   }
+  //checks on leave of admin is still logged in and if not unsubs to adminRoleSub
   ngOnDestroy() {
     if (this.adminRoleSubscription) {
       this.adminRoleSubscription.unsubscribe();
     }
   }
+  // Adds the categories that will be shown to categories Array
   showCategories(): void {
     this.catService.getAllCategories().subscribe(value => {
       this.categories = value;
     });
   }
+  // Function to get to the edit page of a category
   goToEditPage(id: number) {
     this.router.navigate(['/category/edit', id]).then(r => false);
   }
+  // Function to get to the detail page of a category
   goToDetailPage(id: number) {
     this.router.navigate(['/category/detail', id]).then(r => false);
   }
-
+  // updates display columns according to admin or no admin
   private updateDisplayedColumns() {
     this.displayedColumns = this.checkAdminRole() ? ['name', 'action'] : ['name'];
   }
-  deleteCategory(id: number){
-    this.catService.deleteCategoryById(id).subscribe(value => {
-      console.log("Category was deleted")
-      this.showCategories()
-    },
-      error => {
-      if (error.status === 403) {
-        console.log("Authentication Error please login again")
-        this.router.navigateByUrl('/auth/login');
+  // deletes category if user is logged in as admin and confirms SWAL dialog
+  // sends user to login page if not logged in as admin
+  deleteCategory(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you really want to delete this category?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User clicked 'Yes', proceed with deletion
+        this.catService.deleteCategoryById(id).subscribe(value => {
+            this.tostr.success('Product deleted successfully', 'Success', {
+              positionClass: 'toast-bottom-center'})
+            this.showCategories();
+          },
+          error => {
+            if (error.status === 403) {
+              this.tostr.error('Not Authorized', 'Failed', {
+                positionClass: 'toast-bottom-center'
+              })
+              this.router.navigateByUrl('/auth/login');
+            } else {
+              this.tostr.error('Something dumb happened ¯\\_(ツ)_/¯', 'Failed', {
+                positionClass: 'toast-bottom-center'
+              })
+            }
+          });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked 'Cancel'
+        this.tostr.info('Delete cancelled', 'Cancelled', {
+          positionClass: 'toast-bottom-center'
+        });
       }
-      else{
-        console.log("Something dumb happened, please try again")
-      }
-      }
-    )
+    });
   }
+  // Function to check if logged-in user is admin
   private checkAdminRole(): boolean {
     const token = localStorage.getItem('ACCESS_TOKEN');
     if (!token) {

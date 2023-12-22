@@ -22,18 +22,23 @@ export class CategoryDetailComponent {
     private activeRouter: ActivatedRoute
   ) {
   }
+  // sets the values of the category that is displayed
   ngOnInit(): void {
     this.activeRouter.params.subscribe((params: Params) => {
       const categoryId = +params['id']; // The '+' converts the string to a number
       if (categoryId) {
-        this.categoryId = categoryId; // Set your component's categoryId property
+        this.categoryId = categoryId;
         this.getCategoryData(this.categoryId);
       }
     });
   }
+
+  // function to go back to all category page
   goBack(): void{
     this.router.navigateByUrl('/category/all')
   }
+
+  // gets the data from the category using its ID in the URL
   getCategoryData(catId: number): void {
     this.catService.getCategoryById(catId).subscribe(value => {
       this.showCategory = value;
@@ -41,11 +46,13 @@ export class CategoryDetailComponent {
     });
   }
 
+  // Transforms the category, so it can be displayed vertically instead of everything having its own column
   transformCategoryData(category: CategoryDetailDto) {
     this.displayData = [
       { key: 'Id:', value: category.id },
       { key: 'Active:', value: category.active ? 'Yes' : 'No' },
       { key: 'Name:', value: category.name },
+      // gets all Products that are registered on this category and puts them into a single string
       { key: 'Products:', value: category.products.map(p => p.name).join(', ') }
     ];
   }

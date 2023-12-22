@@ -9,7 +9,6 @@ import {LoginComponent} from "../../auth/login/login.component";
 import {jwtDecode} from "jwt-decode";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
-import * as sweetalert2 from "sweetalert2";
 import Swal from "sweetalert2";
 @Component({
   selector: 'pm-product-list-component',
@@ -20,7 +19,7 @@ import Swal from "sweetalert2";
 })
 export class ProductListComponentComponent {
   products: ProductShowDto[] = [];
-  displayedColumns: string[] = ['id', 'name', 'stock', 'price', 'sku', 'action']
+  displayedColumns: string[] = ['image', 'id', 'name', 'stock', 'price', 'sku', 'action']
   private adminRoleSubscription: Subscription;
 
   constructor(
@@ -30,7 +29,7 @@ export class ProductListComponentComponent {
   ) {this.adminRoleSubscription = LoginComponent.onLoginChange.subscribe((isLoggedIn) => {
     this.updateDisplayedColumns();
   });  }
-  //sets initial values and checks if admin is logged in
+  //sets initial values and checks if user is admin
   ngOnInit(): void {
     this.updateDisplayedColumns();
     this.showProducts();
@@ -74,11 +73,12 @@ export class ProductListComponentComponent {
       return false;
     }
   }
-  // updates display columns according to logged-in user
+  // updates display columns according to admin or no admin
   private updateDisplayedColumns() {
-    this.displayedColumns = this.checkAdminRole() ? ['id', 'name', 'stock', 'price', 'sku', 'action'] : ['id', 'name', 'stock', 'price', 'sku'];
+    this.displayedColumns = this.checkAdminRole() ? ['image', 'id', 'name', 'stock', 'price', 'sku', 'action'] : ['image','id', 'name', 'stock', 'price', 'sku'];
   }
-  // deletes product if user is logged in as admin, if not sends to login page
+  // deletes product if user is logged in as admin and confirms SWAL dialog
+  // sends user to login page if not logged in as admin
   deleteProduct(id: number){
     Swal.fire({
       title: 'Are you sure?',
@@ -96,6 +96,11 @@ export class ProductListComponentComponent {
             positionClass: 'toast-bottom-center'
           });
           this.showProducts();
+        }, error => {
+          this.tostr.error('Something dumb happened ¯\\_(ツ)_/¯', 'Failed', {
+            positionClass: 'toast-bottom-center'
+          })
+          this.router.navigateByUrl('/auth/login')
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // User clicked 'Cancel'
