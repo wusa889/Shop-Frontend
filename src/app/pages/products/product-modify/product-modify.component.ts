@@ -7,6 +7,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ToastrService} from "ngx-toastr";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 @Component({
@@ -20,16 +22,18 @@ export class ProductModifyComponent {
   constructor(
       private readonly prodService: ProductControllerService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService
   ) {  }
   myForm = new FormGroup({
     sku: new FormControl<string>("", Validators.required),
     name: new FormControl<string>("", Validators.required),
     image: new FormControl<string>("", Validators.required),
     description: new FormControl<string>("", Validators.required),
-    price: new FormControl<number>(0.00, Validators.required),
-    stock: new FormControl<number>(0, Validators.required),
-    active: new FormControl<boolean>(false, Validators.required)
+    price: new FormControl<number | null>(null, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]),
+    stock: new FormControl<number| null>(null,[Validators.required, Validators.pattern(/\d+$/)]),
+    active: new FormControl<boolean>(false, Validators.required),
+    categoryId: new FormControl<number| null>(null,[Validators.pattern(/\d+$/)])
   })
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -50,6 +54,7 @@ export class ProductModifyComponent {
     let price: number = this.myForm.value.price!;
     let stock: number = this.myForm.value.stock!;
     let active: boolean = this.myForm.value.active!;
+    let categoryId: null | number = this.myForm.value.categoryId!;
     if (this.productId) {
       this.prodService.updateProductById(this.productId, {
         sku: sku,
@@ -59,11 +64,18 @@ export class ProductModifyComponent {
         price: price,
         stock: stock,
         active: active,
+        categoryId: categoryId
       }).subscribe(value => {
-        //put toast message //
-        console.log("Product id: " + this.productId + " name: " + name + " Was updated.")
         this.router.navigateByUrl('/product/all')
-      });
+        this.toastr.success('product updated successfully', 'Success', {
+          positionClass: 'toast-bottom-center'
+        })
+      },
+        error => {
+        this.toastr.error('Category ID not found, please enter valid one or leave empty', 'Failed', {
+          positionClass: 'toast-bottom-center'
+        })
+        });
     } else {
       this.prodService.createProduct({
         sku: sku,
@@ -73,8 +85,16 @@ export class ProductModifyComponent {
         price: price,
         stock: stock,
         active: active,
+        categoryId: categoryId
       }).subscribe(value => {
-        console.log("Product Created")
+        this.router.navigateByUrl('/product/all')
+        this.toastr.success('product created successfully', 'Success', {
+          positionClass: 'toast-bottom-center'
+        })
+      },
+        error => {
+          this.toastr.error('Category ID not found, please enter valid one or leave empty', 'Failed', {
+            positionClass: 'toast-bottom-center'})
       })
     }
   }
@@ -89,7 +109,7 @@ export class ProductModifyComponent {
         price: product.price,
         stock: product.stock,
         active: product.active,
-
+        categoryId: product.category?.id
       });
     });
   }

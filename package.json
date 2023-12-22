@@ -23,6 +23,7 @@
     "@angular/router": "^17.0.0",
     "@openapitools/openapi-generator-cli": "^2.7.0",
     "jwt-decode": "^4.0.0",
+    "ngx-toastr": "^18.0.0",
     "node": "^21.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

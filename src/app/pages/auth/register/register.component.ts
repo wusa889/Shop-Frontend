@@ -9,6 +9,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {UserControllerService} from "../../../openapi-client";
 import {routes} from "../../../app.routes";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'pm-register',
@@ -20,7 +21,8 @@ import {routes} from "../../../app.routes";
 export class RegisterComponent {
   router = inject(Router)
   constructor(
-    private readonly userService: UserControllerService
+    private readonly userService: UserControllerService,
+    private tostr: ToastrService
   ) {
   }
   myForm = new FormGroup({
@@ -58,7 +60,8 @@ export class RegisterComponent {
         Validators.pattern(/\D+/)]),
     country: new FormControl<string>("",
       [Validators.required,
-        Validators.maxLength(15),
+        Validators.minLength(2),
+        Validators.maxLength(2),
         Validators.pattern(/\D+/)]),
     phone: new FormControl<string>("",
       [Validators.maxLength(15),
@@ -91,6 +94,9 @@ export class RegisterComponent {
         lastName: lastName,
         firstName: firstName
     }).subscribe(value => {
+      this.tostr.success('Registration Successfull', 'Success', {
+        positionClass: 'toast-bottom-center'
+      })
       this.router.navigateByUrl('/auth/login')
     });
 

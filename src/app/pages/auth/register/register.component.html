@@ -1,42 +1,88 @@
 <div class="formContainer">
   <form class="loginform mat-elevation-z3" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
     <h1 class="h1left">Registration</h1>
-    <mat-form-field class="formItem">
-      <mat-label>Anrede</mat-label>
-      <mat-select [formControl]="myForm.controls.firstName">
-        <mat-option value="Mann">Herr</mat-option>
-        <mat-option value="Frau">Frau</mat-option>
-      </mat-select>
-    </mat-form-field>
-
     <div class="formRow">
       <mat-form-field class="formItem50">
         <mat-label>Firstname</mat-label>
+        <mat-error *ngIf="myForm.controls.firstName.hasError('required')">
+          Field cant be empty
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.firstName.hasError('minlength')">
+          Field has to be atleast 2 characters long
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.firstName.hasError('maxlength')">
+          Field cant be longer than 255 characters
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.firstName.hasError('pattern')">
+          Field can only consist of letters
+        </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.firstName">
       </mat-form-field>
-
       <mat-form-field class="formItem50">
         <mat-label>Lastname</mat-label>
+        <mat-error *ngIf="myForm.controls.lastName.hasError('required')">
+          Field cant be empty
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.lastName.hasError('minlength')">
+          Field has to be atleast 2 characters long
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.lastName.hasError('maxlength')">
+          Field cant be longer than 255 characters
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.lastName.hasError('pattern')">
+          Field can only consist of letters
+        </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.lastName">
       </mat-form-field>
-
     </div>
-
       <mat-form-field class="formItem">
         <mat-label>Street</mat-label>
+        <mat-error *ngIf="myForm.controls.street.hasError('required')">
+          Field cant be empty
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.street.hasError('minlength')">
+          Field has to be atleast 2 characters long
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.street.hasError('maxlength')">
+          Field cant be longer than 255 characters
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.street.hasError('pattern')">
+          Field can only consist of letters and numbers
+        </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.street">
       </mat-form-field>
 
     <div class="formRow">
       <mat-form-field class="formItem40">
         <mat-label>City</mat-label>
+        <mat-error *ngIf="myForm.controls.city.hasError('required')">
+          Field cant be empty
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.city.hasError('minlength')">
+          Field has to be atleast 2 characters long
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.city.hasError('maxlength')">
+          Field cant be longer than 255 characters
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.city.hasError('pattern')">
+          Field can only consist of letters
+        </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.city">
       </mat-form-field>
 
       <mat-form-field class="formItem20">
         <mat-label>Zip</mat-label>
+        <mat-error *ngIf="myForm.controls.zip.hasError('required')">
+          Field cant be empty
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.zip.hasError('minlength')">
+          Field has to be atleast 4 numbers long
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.zip.hasError('maxlength')">
+          Field cant be longer than 255 numbers
+        </mat-error>
         <mat-error *ngIf="myForm.controls.zip.hasError('pattern')">
-          Zip kann nur aus Zahlen bestehen.
+          Field can only consist of numbers
         </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.zip">
       </mat-form-field>
@@ -45,16 +91,41 @@
 
     <mat-form-field class="formItem">
       <mat-label>Country</mat-label>
+      <mat-error *ngIf="myForm.controls.country.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.country.hasError('minlength')">
+        Field has to be 2 characters long
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.country.hasError('maxlength')">
+        Field has to be 2 characters long
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.country.hasError('pattern')">
+        Field can only consist of characters
+      </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.country">
     </mat-form-field>
 
     <div class="formRow">
     <mat-form-field class="formItem50">
       <mat-label>Phone Number</mat-label>
+      <mat-error *ngIf="myForm.controls.phone.hasError('maxlength')">
+        Field cant be longer than 15 numbers
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.phone.hasError('pattern')">
+        Field can only consist of numbers
+      </mat-error>
       <input type="number" matInput [formControl]="myForm.controls.phone">
     </mat-form-field>
+
       <mat-form-field class="formItem50">
         <mat-label>Mobile Number</mat-label>
+        <mat-error *ngIf="myForm.controls.mobilePhone.hasError('maxlength')">
+          Field cant be longer than 15 numbers
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.mobilePhone.hasError('pattern')">
+          Field can only consist of numbers
+        </mat-error>
         <input type="number" matInput [formControl]="myForm.controls.mobilePhone">
       </mat-form-field>
     </div>
@@ -62,19 +133,28 @@
     <mat-form-field class="formItem">
       <mat-label>E-Mail</mat-label>
       <mat-error *ngIf="myForm.controls.email.hasError('required')">
-        Feld darf nicht leer sein
+        Field cant be empty
       </mat-error>
       <mat-error *ngIf="myForm.controls.email.hasError('pattern')">
-        Bitte gültige E-Mail Adresse eingeben
+        Please enter a valid e-mail
       </mat-error>
       <input type="email" matInput [formControl]="myForm.controls.email">
     </mat-form-field>
 
     <mat-form-field class="formItem">
       <mat-label>Password</mat-label>
+      <mat-error *ngIf="myForm.controls.password.hasError('required')">
+        Field cant be empty
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.password.hasError('minlength')">
+        Field has to be atleast 8 characters long
+      </mat-error>
+      <mat-error *ngIf="myForm.controls.password.hasError('pattern')">
+        Password has to contain a capitalized letter, a number and a special character
+      </mat-error>
       <input type="password" matInput [formControl]="myForm.controls.password">
     </mat-form-field>
 
-    <button type="button" mat-raised-button (click)="submit()">Register</button>
+    <button type="submit" mat-raised-button (click)="submit()">Register</button>
   </form>
 </div>

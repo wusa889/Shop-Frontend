@@ -13,6 +13,7 @@ import {MatInputModule} from "@angular/material/input";
 import {Router, RouterLink} from "@angular/router";
 import {UserControllerService} from "../../../openapi-client";
 import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
+import {ToastrService} from "ngx-toastr";
 
 
 
@@ -27,7 +28,8 @@ import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/comp
 export class LoginComponent {
   router = inject(Router)
   constructor(
-    private readonly userService: UserControllerService
+    private readonly userService: UserControllerService,
+    private toastr: ToastrService
   ) {
   }
   static onLoginChange: EventEmitter<boolean> = new EventEmitter();
@@ -44,10 +46,16 @@ export class LoginComponent {
         email: userName,
         password: password
     }).subscribe(value =>{
-      console.log(value)
+      this.toastr.success('login successfull', 'Success', {
+        positionClass: 'toast-bottom-center'
+      });
       localStorage.setItem("ACCESS_TOKEN", value.token!)
       this.router.navigateByUrl('/')
       LoginComponent.onLoginChange.emit(true);
+    }, error => {
+     this.toastr.error("Wrong Username or Password", "Failed", {
+       positionClass: 'toast-bottom-center'
+     })
     })
   }
 }

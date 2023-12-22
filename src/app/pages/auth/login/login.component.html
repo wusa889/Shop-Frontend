@@ -3,20 +3,23 @@
     <mat-form-field class="formItem">
       <mat-label>E-Mail</mat-label>
       <mat-error *ngIf="myForm.controls.userName.hasError('required')">
-        Feld darf nicht leer sein
+        Field cant be empty
       </mat-error>
       <mat-error *ngIf="myForm.controls.userName.hasError('pattern')">
-        Bitte gültige E-Mail Adresse eingeben
+        Please enter a valid e-mail
       </mat-error>
       <input type="email" matInput [formControl]="myForm.controls.userName">
     </mat-form-field>
 
     <mat-form-field class="formItem">
       <mat-label>Password</mat-label>
+      <mat-error *ngIf="myForm.controls.password.hasError('required')">
+        Field cant be empty
+      </mat-error>
       <input type="password" matInput [formControl]="myForm.controls.password">
     </mat-form-field>
 
-    <button class="submitButton" type="button" mat-raised-button color="primary" (click)="submit()">Login</button>
+    <button class="submitButton" type="submit" mat-raised-button color="primary">Login</button>
     <button type="button" mat-raised-button routerLink="/auth/register">Register</button>
   </form>
 </div>

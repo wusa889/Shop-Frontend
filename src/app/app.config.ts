@@ -7,11 +7,13 @@ import {ApiModule, Configuration} from "./openapi-client";
 import {provideHttpClient, withInterceptors, withInterceptorsFromDi} from "@angular/common/http";
 import {authorizationInterceptor} from "./interceptors/authorization.interceptor";
 import {expiredInterceptor} from "./interceptors/expired.interceptor";
+import {provideToastr} from "ngx-toastr";
 
 
 export const appConfig: ApplicationConfig = {
         providers: [provideRouter(routes),
             provideAnimations(),
+            provideToastr(),
             provideHttpClient(
                 withInterceptors([
                     expiredInterceptor,

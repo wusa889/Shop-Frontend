@@ -7,6 +7,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
 import {LoginComponent} from "../pages/auth/login/login.component";
 import {Subscription} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'pm-header',
@@ -20,7 +21,8 @@ export class HeaderComponent {
   private loginSubscription: Subscription;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.isLoggedIn = !!localStorage.getItem('ACCESS_TOKEN');
     this.loginSubscription = LoginComponent.onLoginChange.subscribe((status: boolean) => {
@@ -31,9 +33,12 @@ export class HeaderComponent {
     this.router.navigateByUrl('/')
   }
   logout(): void {
+    this.toastr.success('Logout successful', 'Success', {
+      positionClass: 'toast-bottom-center'
+    })
     localStorage.removeItem('ACCESS_TOKEN'); // Adjust if your token key is different
     this.isLoggedIn = false;
-    this.router.navigateByUrl('/auth/login'); // Optionally redirect the user to the home page after logout
+    this.router.navigateByUrl('/'); // Optionally redirect the user to the home page after logout
     LoginComponent.onLoginChange.emit(false);
   }
 }

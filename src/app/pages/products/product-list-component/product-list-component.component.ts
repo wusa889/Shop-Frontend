@@ -8,6 +8,7 @@ import {MatTableModule} from "@angular/material/table";
 import {LoginComponent} from "../../auth/login/login.component";
 import {jwtDecode} from "jwt-decode";
 import {Subscription} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'pm-product-list-component',
@@ -23,7 +24,8 @@ export class ProductListComponentComponent {
 
   constructor(
     private readonly prodService: ProductControllerService,
-    private router: Router
+    private router: Router,
+    private tostr: ToastrService
   ) {this.adminRoleSubscription = LoginComponent.onLoginChange.subscribe((isLoggedIn) => {
     this.updateDisplayedColumns();
   });  }
@@ -71,16 +73,23 @@ export class ProductListComponentComponent {
   }
   deleteProduct(id: number){
     this.prodService.deleteProductById(id).subscribe(value => {
-      console.log("product was deleted.")
+      this.tostr.success('Product deleted successfully', 'Success', {
+        positionClass: 'toast-bottom-center'
+      })
       this.showProducts()
     },
       error => {
       if (error.status === 403) {
         console.log("Authentication Error please login again")
+        this.tostr.error("please login again", "Failed", {
+          positionClass: 'toast-bottom-center'
+        })
         this.router.navigateByUrl('/auth/login');
       }
       else{
-        console.log("Something dumb happend, please try again")
+        this.tostr.error("Something dumb happened ¯\\_(ツ)_/¯", "Failed", {
+          positionClass: 'toast-bottom-center'
+      })
       }
       }
     )
