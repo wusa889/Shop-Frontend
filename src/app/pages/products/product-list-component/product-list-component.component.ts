@@ -9,7 +9,8 @@ import {LoginComponent} from "../../auth/login/login.component";
 import {jwtDecode} from "jwt-decode";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
-
+import * as sweetalert2 from "sweetalert2";
+import Swal from "sweetalert2";
 @Component({
   selector: 'pm-product-list-component',
   standalone: true,
@@ -29,7 +30,7 @@ export class ProductListComponentComponent {
   ) {this.adminRoleSubscription = LoginComponent.onLoginChange.subscribe((isLoggedIn) => {
     this.updateDisplayedColumns();
   });  }
-
+  //sets initial values and checks if admin is logged in
   ngOnInit(): void {
     this.updateDisplayedColumns();
     this.showProducts();
@@ -38,22 +39,27 @@ export class ProductListComponentComponent {
       this.showProducts();
     })
   }
+  //checks on leave of admin is still logged in and if not unsubs to adminRoleSub
   ngOnDestroy() {
     if (this.adminRoleSubscription) {
       this.adminRoleSubscription.unsubscribe();
     }
   }
+  // Adds the products that will be shown to products Array
   private showProducts() {
     this.prodService.getAllProducts().subscribe(value => {
       this.products = value;
     });
   }
+  // Function to get to the edit page of a product
   goToEditPage(id: number) {
     this.router.navigate(['/product/edit', id]).then(r => false);
   }
+  // Function to get to the detail page of a product
   goToDetailPage(id: number){
     this.router.navigate(['/product/detail', id]).then(r => false);
   }
+  // Function to check if logged-in user is admin
   private checkAdminRole(): boolean {
     const token = localStorage.getItem('ACCESS_TOKEN');
     if (!token) {
@@ -68,30 +74,35 @@ export class ProductListComponentComponent {
       return false;
     }
   }
+  // updates display columns according to logged-in user
   private updateDisplayedColumns() {
     this.displayedColumns = this.checkAdminRole() ? ['id', 'name', 'stock', 'price', 'sku', 'action'] : ['id', 'name', 'stock', 'price', 'sku'];
   }
+  // deletes product if user is logged in as admin, if not sends to login page
   deleteProduct(id: number){
-    this.prodService.deleteProductById(id).subscribe(value => {
-      this.tostr.success('Product deleted successfully', 'Success', {
-        positionClass: 'toast-bottom-center'
-      })
-      this.showProducts()
-    },
-      error => {
-      if (error.status === 403) {
-        console.log("Authentication Error please login again")
-        this.tostr.error("please login again", "Failed", {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you really want to delete this product?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User clicked 'Yes'
+        this.prodService.deleteProductById(id).subscribe(value => {
+          this.tostr.success('Product deleted successfully', 'Success', {
+            positionClass: 'toast-bottom-center'
+          });
+          this.showProducts();
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked 'Cancel'
+        this.tostr.info('Delete cancelled', 'Cancelled', {
           positionClass: 'toast-bottom-center'
-        })
-        this.router.navigateByUrl('/auth/login');
+        });
       }
-      else{
-        this.tostr.error("Something dumb happened ¯\\_(ツ)_/¯", "Failed", {
-          positionClass: 'toast-bottom-center'
-      })
-      }
-      }
-    )
+    });
   }
 }
