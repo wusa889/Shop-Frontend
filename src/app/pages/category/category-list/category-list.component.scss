@@ -10,7 +10,8 @@
 }
 
 table.mat-elevation-z3 {
-  width: 50vw;
+  min-width: 25vw;
+  width: auto;
   margin: 20px;
 }
 .linkName {
