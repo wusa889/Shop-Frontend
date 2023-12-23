@@ -21,12 +21,10 @@ export const expiredGuardGuard: CanActivateFn = (route, state) => {
             return true;
         }
         if(isExpired()){
-            console.log("Token is expired please login again")
             router.navigateByUrl("/auth/login").then(r => {return false});
             return false;
         }
         else{
-            console.log("Token is expired please login again")
             router.navigateByUrl("/auth/login").then(r => {return false});
             return false;
         }

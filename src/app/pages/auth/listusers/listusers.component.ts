@@ -47,7 +47,6 @@ export class ListusersComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.promoteUser(id).subscribe(value => {
-          console.log("user Promoted")
         }, error => {
           this.tostr.error('This user is already admin', 'Failed', {
             positionClass: 'toast-bottom-center'

@@ -6,7 +6,6 @@ import {ProductManagerJWTPayload} from "./product-manager-j-w-t.payload";
 
 export const isAdminGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
-  console.log(localStorage.getItem("ACCESS_TOKEN"))
   function isAdmin():boolean{
 
     if(localStorage.getItem("ACCESS_TOKEN") === null){
