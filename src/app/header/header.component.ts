@@ -36,9 +36,9 @@ export class HeaderComponent {
     this.toastr.success('Logout successful', 'Success', {
       positionClass: 'toast-bottom-center'
     })
-    localStorage.removeItem('ACCESS_TOKEN'); // Adjust if your token key is different
+    localStorage.removeItem('ACCESS_TOKEN');
     this.isLoggedIn = false;
-    this.router.navigateByUrl('/'); // Optionally redirect the user to the home page after logout
+    this.router.navigateByUrl('/');
     LoginComponent.onLoginChange.emit(false);
   }
 }

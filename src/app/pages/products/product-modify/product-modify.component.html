@@ -7,7 +7,6 @@
       </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.name">
     </mat-form-field>
-
     <mat-form-field class="formItem">
       <mat-label>Preis</mat-label>
       <mat-error *ngIf="myForm.controls.price.hasError('required')">
@@ -18,7 +17,6 @@
       </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.price">
     </mat-form-field>
-
     <mat-form-field class="formItem">
       <mat-label>Beschreibung</mat-label>
       <mat-error *ngIf="myForm.controls.description.hasError('required')">
@@ -26,7 +24,6 @@
       </mat-error>
       <textarea matInput [formControl]="myForm.controls.description"></textarea>
     </mat-form-field>
-
     <mat-form-field class="formItem">
       <mat-label>Stock</mat-label>
       <mat-error *ngIf="myForm.controls.stock.hasError('required')">
@@ -37,7 +34,6 @@
       </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.stock">
     </mat-form-field>
-
     <mat-form-field class="formItem">
       <mat-label>SKU</mat-label>
       <mat-error *ngIf="myForm.controls.sku.hasError('required')">
@@ -45,8 +41,6 @@
       </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.sku">
     </mat-form-field>
-
-
     <mat-form-field class="formItem">
       <mat-label>Bild Pfad</mat-label>
       <mat-error *ngIf="myForm.controls.image.hasError('required')">
@@ -54,7 +48,6 @@
       </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.image">
     </mat-form-field>
-
     <mat-form-field class="formItem">
       <mat-label>Category ID</mat-label>
       <mat-error *ngIf="myForm.controls.categoryId.hasError('pattern')">
@@ -62,10 +55,7 @@
       </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.categoryId">
     </mat-form-field>
-
     <mat-slide-toggle class="formItem" [formControl]="myForm.controls.active">Active</mat-slide-toggle>
-
-
     <div class="buttonContainer">
       <button class="submitButton" color="primary" type="submit" mat-raised-button>Submit</button>
     </div>

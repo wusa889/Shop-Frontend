@@ -10,7 +10,6 @@
       </mat-error>
       <input type="email" matInput [formControl]="myForm.controls.userName">
     </mat-form-field>
-
     <mat-form-field class="formItem">
       <mat-label>Password</mat-label>
       <mat-error *ngIf="myForm.controls.password.hasError('required')">
@@ -18,7 +17,6 @@
       </mat-error>
       <input type="password" matInput [formControl]="myForm.controls.password">
     </mat-form-field>
-
     <button class="submitButton" type="submit" mat-raised-button color="primary">Login</button>
     <button type="button" mat-raised-button routerLink="/auth/register">Register</button>
   </form>

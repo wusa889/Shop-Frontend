@@ -51,7 +51,6 @@
         </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.street">
       </mat-form-field>
-
     <div class="formRow">
       <mat-form-field class="formItem40">
         <mat-label>City</mat-label>
@@ -69,7 +68,6 @@
         </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.city">
       </mat-form-field>
-
       <mat-form-field class="formItem20">
         <mat-label>Zip</mat-label>
         <mat-error *ngIf="myForm.controls.zip.hasError('required')">
@@ -86,9 +84,7 @@
         </mat-error>
         <input type="text" matInput [formControl]="myForm.controls.zip">
       </mat-form-field>
-
     </div>
-
     <mat-form-field class="formItem">
       <mat-label>Country</mat-label>
       <mat-error *ngIf="myForm.controls.country.hasError('required')">
@@ -105,7 +101,6 @@
       </mat-error>
       <input type="text" matInput [formControl]="myForm.controls.country">
     </mat-form-field>
-
     <div class="formRow">
     <mat-form-field class="formItem50">
       <mat-label>Phone Number</mat-label>
@@ -117,7 +112,6 @@
       </mat-error>
       <input type="number" matInput [formControl]="myForm.controls.phone">
     </mat-form-field>
-
       <mat-form-field class="formItem50">
         <mat-label>Mobile Number</mat-label>
         <mat-error *ngIf="myForm.controls.mobilePhone.hasError('maxlength')">
@@ -129,7 +123,6 @@
         <input type="number" matInput [formControl]="myForm.controls.mobilePhone">
       </mat-form-field>
     </div>
-
     <mat-form-field class="formItem">
       <mat-label>E-Mail</mat-label>
       <mat-error *ngIf="myForm.controls.email.hasError('required')">
@@ -140,7 +133,6 @@
       </mat-error>
       <input type="email" matInput [formControl]="myForm.controls.email">
     </mat-form-field>
-
     <mat-form-field class="formItem">
       <mat-label>Password</mat-label>
       <mat-error *ngIf="myForm.controls.password.hasError('required')">
@@ -154,7 +146,6 @@
       </mat-error>
       <input type="password" matInput [formControl]="myForm.controls.password">
     </mat-form-field>
-
     <button type="submit" mat-raised-button>Register</button>
   </form>
 </div>

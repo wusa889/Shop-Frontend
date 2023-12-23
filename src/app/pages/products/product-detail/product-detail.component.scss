@@ -1,35 +1,30 @@
 .main-container {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center children horizontally */
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
-
 .table-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px;
 }
-
 .icon-display {
   color: navy;
   transform: scale(2);
-  cursor: pointer; /* Make it look clickable */
+  cursor: pointer;
 }
-
 .back-container {
-  margin-top: 20px; /* Add space above the arrow */
+  margin-top: 20px;
   display: flex;
-  justify-content: center; /* Center the back arrow horizontally */
+  justify-content: center;
 }
-
 .image-container {
   margin-top: 20px;
   display: flex;
-  justify-content: center; /* Center the image horizontally */
+  justify-content: center;
 }
-
 .center {
   display: block;
   justify-content: center;
@@ -37,11 +32,11 @@
   margin: 20px;
 }
 .mat-elevation-z3 {
-  margin: 0 auto; /* Center the table */
+  margin: 0 auto;
   width: auto;
 }
 .icon-display:hover {
-  color: red; /* Color changes to red on hover */
+  color: red;
 }
 .bold-element{
   font-weight: bold;
