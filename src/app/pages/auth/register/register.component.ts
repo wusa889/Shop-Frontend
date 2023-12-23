@@ -71,7 +71,7 @@ export class RegisterComponent {
         Validators.pattern(/\d+/)]),
   })
 
-  // todo Toast and Swal for this function
+
   submit() {
     let email: string = this.myForm.value.email!;
     let password: string = this.myForm.value.password!;
